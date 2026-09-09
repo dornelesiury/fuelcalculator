@@ -1,6 +1,8 @@
 package com.example.fuelcalculator
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +22,24 @@ class ResultadoActivity : AppCompatActivity() {
         }
 
         val valorTotal = intent.getDoubleExtra("DISTANCIA_CUSTO_TOTAL", 0.0)
-        val tvPreco = findViewById<TextView>(R.id.tvPrecoViagem)
+        val precoPorLitro = intent.getDoubleExtra("DISTANCIA_PRECO_LITRO", 0.0)
+        val consumoPorLitro = intent.getIntExtra("DISTANCIA_CONSUMO_LITRO", 0)
+        val distanciaTotal = intent.getIntExtra("DISTANCIA_VALOR",0)
 
-        tvPreco.text = valorTotal.toString()
+        val tvPrecoViagem = findViewById<TextView>(R.id.tvPrecoViagem)
+        val tvPrecoLitro = findViewById<TextView>(R.id.tvResultadoPreco)
+        val tvConsumoLitro = findViewById<TextView>(R.id.tvResultadoConsumo)
+        val tvDistancia = findViewById<TextView>(R.id.tvResultadoDistancia)
+        val btnResultadoNovo = findViewById<Button>(R.id.btnResultadoNovo)
+
+        tvPrecoViagem.text = valorTotal.toString()
+        tvPrecoLitro.text = precoPorLitro.toString()
+        tvConsumoLitro.text = consumoPorLitro.toString()
+        tvDistancia.text = distanciaTotal.toString()
+        btnResultadoNovo.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }
