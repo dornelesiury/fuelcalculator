@@ -2,12 +2,14 @@ package com.example.fuelcalculator
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.appbar.MaterialToolbar
 
 class ConsumoPorLitroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,12 @@ class ConsumoPorLitroActivity : AppCompatActivity() {
         // Navegar proxima tela
         // Passar dado do preço tela anterior e consumo digitado pelo utilizador
 
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar_consumo_por_litro)
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         val precoCombustivel = intent.getDoubleExtra("PRECO_COMBUSTIVEL", 0.0)
         val edtConsumoPorLitro = findViewById<EditText>(R.id.edtConsumoLitro)
         val btnConsumoPorLitro = findViewById<Button>(R.id.btnConsumoLitroProximo)
@@ -37,4 +45,15 @@ class ConsumoPorLitroActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }
