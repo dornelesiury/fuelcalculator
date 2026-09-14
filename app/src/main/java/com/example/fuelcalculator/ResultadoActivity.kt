@@ -32,10 +32,11 @@ class ResultadoActivity : AppCompatActivity() {
         val tvDistancia = findViewById<TextView>(R.id.tvResultadoDistancia)
         val btnResultadoNovo = findViewById<Button>(R.id.btnResultadoNovo)
 
-        tvPrecoViagem.text = valorTotal.toString()
-        tvPrecoLitro.text = precoPorLitro.toString()
-        tvConsumoLitro.text = consumoPorLitro.toString()
-        tvDistancia.text = distanciaTotal.toString()
+        tvPrecoViagem.text = "€ ${String.format(java.util.Locale.US, "%.2f", valorTotal)}"
+        tvPrecoLitro.text = "€ ${String.format(java.util.Locale.US, "%.2f", precoPorLitro)}"
+        tvConsumoLitro.text = "$consumoPorLitro km/L"
+        tvDistancia.text = "$distanciaTotal km"
+
         btnResultadoNovo.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
